@@ -1,0 +1,62 @@
+{% extends 'base/base_login.html'%}
+
+{% block login %}
+<form method="post">
+    {% csrf_token %}        
+    <div class="mb-3">
+        <label for="username" class="form-label">Usuario</label>
+        <input class="form-control" type="text" name='username' id="username" placeholder="Ingrese su usuario">
+    </div>
+
+    <div class="mb-3">
+       
+        <label class="form-label" for="password-input">Contraseña</label>
+        <div class="position-relative auth-pass-inputgroup mb-3">
+            <input type="password" class="form-control" placeholder="Ingrese contraseña" name='password' id="password-input">
+            <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
+        </div>
+    </div>
+
+    
+    
+    <div class="mt-4">
+        <button class="btn btn-success w-100" type="submit">Ingresar</button>
+    </div>
+
+    
+</form>
+{% endblock %}
+
+
+{% block javascript %}
+
+            <script>
+            
+            {%if form.errors %}
+
+            {% for field in form %}
+                {% if field.errors %}
+
+                {% for error in field.errors %}
+                mensaje1('{{error|escape}}','red');
+                    //{{error|escape}}
+                {% endfor %}
+
+                {% endif %}
+            {% endfor %}
+
+            {%if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                mensaje1('{{error|escape}}','red');                        
+            //{{error|escape}} 
+                {% endfor %}
+            {% endif %}
+
+
+            {% endif %}
+
+
+
+            </script>
+
+{% endblock %}
